@@ -15,7 +15,7 @@ def get_top_3_websites(query):
 
 async def main():
     data=[]
-    full = """superstar rajnikanth meets boxer mohammed ali"""
+    full = """superstar rajnikanth does skydiving with bear grylls"""
 
     load_dotenv()
     genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
@@ -27,7 +27,6 @@ async def main():
     for i in sites:
         print(i)
     for i in sites:
-        print("scraping ... " + i)
         browser = await launch()
         page = await browser.newPage()
         await page.goto(i, timeout=100000)
