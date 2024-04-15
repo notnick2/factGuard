@@ -5,13 +5,9 @@ import asyncio
 from googlesearch import search
 def get_top_5_websites(query):
     try:
-        # Perform Google search and get top 5 results
         search_results = search(query, num_results=5)
-
-        # Print the top 5 websites
         for idx, result in enumerate(search_results, start=1):
             print(f"{idx}. {result}")
-
     except Exception as e:
         print("An error occurred:", e)
 full = """Breaking News: Former President Barack Obama Tragically Passes Away in 2015
@@ -22,12 +18,9 @@ Conspiracy theories abound, with wild speculations ranging from political assass
 The news of Obama's death has sent shockwaves across the globe, prompting an outpouring of grief and tributes from world leaders and ordinary citizens alike. Messages of condolence have flooded social media platforms, with hashtags such as #RIPObama and #GoneTooSoon trending worldwide.
 As the nation grapples with the sudden loss of one of its most iconic leaders, questions linger about the impact of Obama's death on the political landscape and the future of the country. With the upcoming presidential election looming on the horizon, the absence of Obama's leadership casts a shadow of uncertainty over the nation's future.
 In the midst of grief and uncertainty, one thing remains clear: Barack Obama's legacy will endure, his vision of hope and unity serving as a beacon of inspiration for generations to come. As the nation mourns the loss of a true patriot and leader, let us honor Obama's memory by reaffirming our commitment to the values he held dear."""
-
 load_dotenv() 
 print(os.environ['GOOGLE_API_KEY'])
-
 genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
-
 model = genai.GenerativeModel('gemini-1.0-pro-latest')
 response = model.generate_content(full + " generate one question to ask a search engine about the above information - return a string")
 final = response.text
