@@ -24,21 +24,21 @@ export default function Home() {
           
           <header className="navbar flex justify-around items-center p-4">
             <div className="flex items-center">
-              <h1 className="text-xl font-bold">
+              <h1 className="text-2xl font-bold">
                 Fact<span className="text-[#8DECB4]">Guard</span>
               </h1>
             </div>
             <div className="flex items-center space-x-6">
               <button
-                className="nav-link hover:text-blue-500"
+                className="nav-link nav-link hover:text-[#8DECB4] duration-300 transition-all ease-in-out"
                 onClick={toggleTheme}
               >
                 {theme === 'light' ? 'Dark Mode' : 'Light Mode'}
               </button>
-              <button onClick={()=>signIn("google")} className="nav-link hover:text-blue-500">
+              <button onClick={()=>signIn("google")} className="nav-link hover:text-[#8DECB4] duration-300 transition-all ease-in-out ">
                 Login
               </button>
-              <button onClick={()=>signIn("google")} className="nav-link hover:text-blue-500">
+              <button onClick={()=>signIn("google")} className="nav-link hover:text-[#8DECB4] duration-300 transition-all ease-in-out">
                 Get Started
               </button>
             </div>
@@ -46,19 +46,19 @@ export default function Home() {
          
 
           <main className="flex-grow flex justify-center items-center">
-            <div className="max-w-md space-y-4">
-              <h1 className="text-4xl font-bold text-center mb-4">
+            <div className="max-w-md space-y-8">
+              <h1 className="text-4xl font-bold text-center mb-4 text-[#8DECB4]">
                 Video Content Factual Verification
               </h1>
-              <p className="text-xl text-gray-700 text-center mb-4">
+              <p className="text-xl text-white opacity-70 text-center mb-4">
                 Enter your YouTube video's link below to quickly start accuracy
-                assessment...
+                assessment
               </p>
               
-              <div className="input-container flex flex-row items-center px-4 py-2">
+              <div className="flex flex-row items-center">
                 <input
                   type="text"
-                  className="border border-gray-300 rounded p-2 flex-1 mr-4 w-full"
+                  className="p-2 flex-1 mt-8 mr-4 w-full border-[#8DECB4] border-b bg-transparent outline-none text-[#8DECB4] text-center font-mono focus:border-b-2 duration-300 transition-all ease-in-out"
                   placeholder="Enter URL of YouTube video..."
                   name="url"
                   value={link}
@@ -67,7 +67,7 @@ export default function Home() {
                 />
                 <button
                   onClick={submit_link}
-                  className="bg-black border-[#8DECB4] border-2 text-white px-4 py-2 rounded hover:bg-[#8DECB4] hover:text-black duration-300 transition-all ease-in-out"
+                  className="bg-black border-[#8DECB4] border-2 text-white px-4 py-2 mt-8 rounded hover:bg-[#8DECB4] hover:text-black duration-300 transition-all ease-in-out"
                 >
                   Check Facts
                 </button>
