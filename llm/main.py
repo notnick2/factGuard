@@ -64,4 +64,5 @@ async def run(req_body: dict):
     print()
     response = model.generate_content(text_data + " < - - -  this is the correct data - based on this data tell me if this contains any factual errors - give response as if you're a fact validator - if yes, specify every factual error and state the truth from this (give response in 100 words) ... if the provided small data does not match with the big data (true) consider it as a factual error"+full)
     final = {"message":response.text,"references":sites_send}
+    print(final)
     return final
