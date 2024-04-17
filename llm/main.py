@@ -8,6 +8,7 @@ from youtube_transcript_api import YouTubeTranscriptApi
 import google.generativeai as genai
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from langchain_community.llms import Ollama
 
 app=FastAPI()
 app.add_middleware(
@@ -36,11 +37,13 @@ async def run(req_body: dict):
     for i in transcript:
         full+=i["text"]+" "
     print(full)
-    load_dotenv()
-    genai.configure(api_key=os.environ["GOOGLE_API_KEY"])
-    model = genai.GenerativeModel('gemini-1.0-pro-latest')
-    response = model.generate_content(full + " generate one question to ask a search engine about the above information - return a string")
-    final = response.text
+    #load_dotenv()
+    llm = Ollama(model="llama2")
+    response=llm.invoke(full+ " generate one question to ask a search engine about the above information - return a string")
+    final = response
+    print(final)
+    print()
+    print()
     sites = get_top_3_websites(final)
     for i in sites:
         print(i)
@@ -55,14 +58,9 @@ async def run(req_body: dict):
         data.append(text_content)
         await browser.close()
     text_data=""
-    for i in data:
-        text_data+=i+"\n\n"
-    f = open("spider.txt", "w")
-    f.write(text_data)
-    f.close()
+    print(data)
+    response = llm.invoke(text_data + "(this is the correct data) - based on this data tell me if this contains any factual errors - give response as if you're a fact validator - if yes, specify every factual error and state the truth from this (give response in 100 words) ... if the provided 'to-be-verified-data' does not match with the 'verified-data-true-data' consider it as a factual error "+full+" RETURN THE ANSWER LIKE YOU'RE A FACT CHECKER")
+    print(response)
     print()
     print()
-    response = model.generate_content(text_data + " < - - -  this is the correct data - based on this data tell me if this contains any factual errors - give response as if you're a fact validator - if yes, specify every factual error and state the truth from this (give response in 100 words) ... if the provided small data does not match with the big data (true) consider it as a factual error"+full)
-    final = {"message":response.text,"references":sites_send}
-    print(final)
-    return final
+    return response
