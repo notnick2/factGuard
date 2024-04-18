@@ -13,7 +13,7 @@ const SignInPage = () => {
             console.log(response.data)
     }
     if(session.status==="authenticated"){
-        router.push("/")
+        router.push("/dashboard")
     }
     return (
         <div className="h-screen bg-[#181b2b]"> 
