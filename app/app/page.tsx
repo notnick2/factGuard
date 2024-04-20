@@ -9,7 +9,7 @@ export default function Home() {
     const [theme, setTheme] = useState('dark'); // Default theme is set to dark
     const session = useSession();
     const router = useRouter();
-
+    
     const toggleTheme = () => {
       setTheme(theme === 'light' ? 'dark' : 'light'); // Toggle between light and dark themes
     };

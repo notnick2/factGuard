@@ -1,0 +1,26 @@
+.typewriter-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .typewriter-text {
+    overflow: hidden; /* Ensures the text is not visible until typed */
+    border-right: .15em solid orange; /* Typing cursor effect */
+    white-space: nowrap; /* Ensures the text doesn't wrap */
+    margin: 0; /* Remove default margins */
+    font-size: 2em; /* Adjust font size as needed */
+    animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+  }
+  
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+  
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: orange; }
+  }
+  

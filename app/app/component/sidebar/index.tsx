@@ -29,6 +29,10 @@ const items: ISidebarItem[] = [
     path: "/dashboard/History",
     //icon: BadgeDollarSign,
   },
+  {
+    name: "+ new video",
+    path: "/dashboard/newVideo"
+  }
      
 ];
 
@@ -42,9 +46,10 @@ const Sidebar = () => {
 
   const handleSignout = async () => {
       await signOut();
-      if(session.status === "unauthenticated"){
-        router.push("/g");
-      }
+      
+  }
+  if(session.status === "unauthenticated"){
+    router.push("/");
   }
 
   return (
