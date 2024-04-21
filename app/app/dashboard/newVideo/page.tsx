@@ -8,8 +8,9 @@ const NewVideo = () => {
 
 
   const submitLink = () => {
-   
-    router.push('/dashboard')
+    const parts = link.split("=");
+    const videoId = parts[1];
+    router.push(`/dashboard?v=${videoId}`)
     // You can implement your logic for checking facts here
   }
 

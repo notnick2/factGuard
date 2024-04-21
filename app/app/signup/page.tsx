@@ -1,10 +1,12 @@
 "use client"
 import React, { useState } from 'react';
 import { signIn, useSession } from 'next-auth/react';
-import { useRouter } from 'next/navigation';
+import { useRouter,useSearchParams } from 'next/navigation';
 import axios from 'axios';
 
 const SignInPage = () => {
+    const searchParams = useSearchParams();
+    const videoId = searchParams.get('v');
     const session = useSession();
     const router = useRouter();
     const [email, setEmail] = useState('');
@@ -21,7 +23,12 @@ const SignInPage = () => {
     };
 
     if (session.status === "authenticated") {
-        router.push("/dashboard");
+        if(videoId){
+        router.push(`/dashboard?v=${videoId}`);
+        }
+        else{
+            router.push('/dashboard?v=none');
+        }
     }
 
     return (

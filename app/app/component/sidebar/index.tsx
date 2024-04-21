@@ -45,7 +45,8 @@ const Sidebar = () => {
   };
 
   const handleSignout = async () => {
-      await signOut();
+      //await signOut();
+      router.push("/");
       
   }
   if(session.status === "unauthenticated"){

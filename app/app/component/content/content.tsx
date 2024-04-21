@@ -1,8 +1,11 @@
 "use client"
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import ScrollToBottom from 'react-scroll-to-bottom';
 import Full from '@/app/test/page';
 import App from '@/app/test/page';
+import ScoreBar from './scoreBar';
+import { boomtha } from '@/app/test/data';
 
 import TypingEffect from "./typingEffect";
 
@@ -23,6 +26,8 @@ interface ResultType {
 }
 
 
+console.log(boomtha)
+console.log(typeof(boomtha))
 
 const ListItem = ({ item, typingSpeed }) => {
 
@@ -34,7 +39,6 @@ const ListItem = ({ item, typingSpeed }) => {
 
 
 
-
 const Content = () => {
 
     const [transcriptionState, setTranscriptionState] = useState('Transcribing video...');
@@ -42,6 +46,10 @@ const Content = () => {
     const [listing, setListing] = useState<any>(null);
     const [list, setList] = useState([]);
     const [apiObject, setApiObject] = useState<ResultType[]>([]);
+    const [fact, setFact] = useState<Boolean[]>([])
+    const list1 = ['item1', 'item2', 'item3', 'item4', 'item5'];
+    const list2 = ['item1', 'item2', 'item3'];
+    const [score, setScore] = useState(false);
 
     const [videoId, setVideoId] = useState('HEH3qLofMaU');
     const typingSpeed = 60;
@@ -61,9 +69,7 @@ const Content = () => {
           });
           console.log(responseList.data);
           console.log(typeof(responseList.data));
-          setList(responseList.data);
-          
-          
+          setList(responseList.data);  
         } catch (error) {
           console.error('Error:', error);
         }
@@ -76,16 +82,20 @@ const Content = () => {
       const fetchData = async () => {
       console.log(list);
       console.log(list.length);
-      for (let i = 0; i < 1; i++) {
+      for (let i = 0; i < list.length; i++) {
         try {
           const response = await axios.get('http://localhost:5000/process');
           const result = response.data; 
           console.log(result)
           setApiObject(prevData => [...prevData, result]);
+          if(result.fact == true){
+            setFact(prevFact => [...prevFact, result.fact])
+          }
         } catch (error) {
           console.error('Error fetching data:', error);
         }
-      } 
+      }
+      setScore(true);
     };
     fetchData();
     },[list]);
@@ -100,20 +110,24 @@ const Content = () => {
 
 
     return (
+      <ScrollToBottom>
         <div>
         <TypingEffect content={transcriptionState} typingSpeed={typingSpeed} />
         {transdone !== null && <TypingEffect content={transdone} typingSpeed={typingSpeed} />}
         {listing !== null && <TypingEffect content={listing} typingSpeed={typingSpeed} />}
+        {score && <ScoreBar list1={list2} list2={list1} />}
        <ul>
         {list.map((item, index) => (
           <ListItem key={index} item={item} typingSpeed={typingSpeed} />
         ))}
       </ul>
       <div>
-      {apiObject.length > 0 ? <App results={apiObject} /> : <p>Loading...</p>}
+    {/* {apiObject.length > 0 ? <App data={apiObject} /> : <p>Loading...</p>} */}
+    <App data={boomtha}/>
     </div>
     </div>
-    );
+    </ScrollToBottom>
+    )
 };    
 
 export default Content;

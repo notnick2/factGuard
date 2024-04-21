@@ -15,13 +15,17 @@ export default function Home() {
     };
 
     const submitLink = async () => {
+      
+      const parts = link.split("=");
+      const videoId = parts[1];
       if (session.status === "authenticated") {
-        router.push("/dashboard");
-        const response = await axios.post("http://localhost:8000/api/guard-the-fact", { url: link });
-        console.log(response.data);
+        router.push(`/dashboard?v=${videoId}`);
       }
       if (session.status === "unauthenticated") {
         router.push("/signin");
+      }
+      if(session.status==="unauthenticated"){
+        router.push(`/signup?v=${videoId}`)
       }
     };
 
