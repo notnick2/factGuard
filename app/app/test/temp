@@ -16,11 +16,12 @@ const App = ({ data }) => {
   const [printingQuery, setPrintingQuery] = useState(false);
   const [printingFact, setPrintingFact] = useState(false);
   const [printingAnswer, setPrintingAnswer] = useState(false);
-  const [printingSource, setPrintingSource] = useState(false);
 
   useEffect(() => {
     if (data && data.query && !printingQuery) {
+      setTimeout(() => {
         setPrintingQuery(true);
+      }, data.query.length);
     }
   }, [printingQuery, data]);
 
@@ -28,29 +29,21 @@ const App = ({ data }) => {
     if (data && data.fact && !printingFact) {
       setTimeout(() => {
         setPrintingFact(true);
-      }, calculateDelay(data.query));
+      }, calculateDelay(data.fact));
     }
-  }, [printingQuery, data]);
+  }, [printingFact, data]);
 
   useEffect(() => {
     if (data && data.answer && !printingAnswer) {
       setTimeout(() => {
         setPrintingAnswer(true);
-      }, calculateDelay(data.query+data.fact));
+      }, calculateDelay(data.answer));
     }
-  }, [printingQuery, data]);
-
-  useEffect(() => {
-    if(data && data.results && !printingSource) {
-      setTimeout(() => {
-        setPrintingSource(true);
-      }, calculateDelay(data.query+data.fact+data.answer));
-    }
-  },[printingQuery, data]);
+  }, [printingAnswer, data]);
 
   const calculateDelay = (text) => {
     // Check if text is defined before accessing its length property
-    return text ? text.length * 50 : 0;
+    return text.length * 50;
   };
 
   return (
@@ -60,11 +53,12 @@ const App = ({ data }) => {
           {printingQuery && <TypingEffect content={data.query} typingSpeed={50} bold='font-bold' size='text-xl' />}
           {printingFact && (
             <div className="flex items-center">
-              <div className={`h-4 w-4 rounded-full ${data.fact ? 'bg-green-500' : 'bg-red-500'} mr-2`}></div>
-              <TypingEffect content={data.fact ? 'Factually accurate' : 'Factually inaccurate'} typingSpeed={50} bold='font-semibold' size='text-lg' />            </div>
+              <div className={`h-4 w-4 rounded-full ${data.fact ? 'bg-green-500' : 'bg-red-500'} ml-2 mr-2`}></div>
+              <p className="text-lg font-semibold">{data.fact ? 'Factually accurate' : 'Factually inaccurate'}</p>
+            </div>
           )}
           {printingAnswer && <TypingEffect content={data.answer} typingSpeed={50} bold='text-gray-700' size='text-xl' />}
-          {printingSource && (
+          {printingAnswer && (
             <>
               <h1 className='text-slate-700 text-2xl ml-2 mt-5 mb-5'>sources</h1>
               <div className="flex flex-wrap">

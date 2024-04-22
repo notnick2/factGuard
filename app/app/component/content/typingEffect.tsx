@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import './TypingEffect.css'; // Import CSS file for styling
 
-const TypingEffect = ({ content, typingSpeed }) => {
+const TypingEffect = ({ content, typingSpeed, bold, size }) => {
   const [displayedContent, setDisplayedContent] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
 
@@ -21,7 +21,7 @@ const TypingEffect = ({ content, typingSpeed }) => {
 
   return (
     <div className="typing-effect">
-      <span>{displayedContent}</span>
+      <h1 className={`m-2 ${size} ${bold} text-slate-800`}>{displayedContent}</h1>
     </div>
   );
 };

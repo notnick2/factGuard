@@ -49,7 +49,7 @@ def generate_response():
           "content": "today i woke up and watching was watching TV then learned that modi has lost 2014 elections, my friend told that he turned a monk in 2015, I have read that he died in an air strike in 2026, today is my birthday and surprisingly today was the day he died today is 13th april"
         }
       ],
-      temperature=1,
+      temperature=0.1,
       max_tokens=1000,
       top_p=1,
       frequency_penalty=0,

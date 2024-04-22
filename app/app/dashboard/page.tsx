@@ -84,26 +84,22 @@ const HomePage = () => {
       if(session.status==="authenticated"){
 
     return (
+      <>
+      <h1 className="text-3xl font-bold mb-5 text-slate-800">
+      VIDEO FACTUAL ACCURACY VERIFICATION
+      </h1>
       <ScrollToBottom>
-    <div className="m-5 bg-gray-100">
-        <div className="flex flex-row ">
-            <h1 className="text-3xl font-bold mb-5">
-            VIDEO FACTUAL ACCURACY VERIFICATION
-            </h1>
-        </div>
+      <div className="m-5 bg-gray-100 flex flex-col-reverse justify-end h-screen"> 
         <div className="">
             <div className="">
-            <YouTubeVideo/>
+            <YouTubeVideo videoId={search} />
                 <Content/>
             </div>
-        
         </div>
     </div>
-    <div className="absolute top-5 right-5 z-5">
-   {/* <YouTubeVideo/>
-    <h1>{search}</h1> */}
-    </div>
+   
     </ScrollToBottom>
+    </>
     );
 }
 };
